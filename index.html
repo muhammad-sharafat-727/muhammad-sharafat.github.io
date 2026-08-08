@@ -1,603 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Sharafat - Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Sharafat — Mobile Developer &amp; AI Engineer</title>
+<meta name="description" content="Portfolio of Muhammad Sharafat — Flutter/Android developer building toward AI engineering, creator of SEHAT, an AI medical assistant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1214;
+    --bg-elevated:#101A1C;
+    --bg-card:#12191B;
+    --line:rgba(236,232,225,0.10);
+    --line-strong:rgba(236,232,225,0.20);
+    --text:#ECE8E1;
+    --text-muted:#93A3A5;
+    --text-dim:#5E6C6E;
+    --ai:#4FD8C4;
+    --ai-dim:rgba(79,216,196,0.12);
+    --mobile:#FF8B5E;
+    --mobile-dim:rgba(255,139,94,0.12);
+    --radius:14px;
+    --maxw:1120px;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            overflow-x: hidden;
-        }
+  *{margin:0;padding:0;box-sizing:border-box;}
 
-        .nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+  html{scroll-behavior:smooth;}
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; letter-spacing:-0.01em;}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+  .mono{font-family:'IBM Plex Mono',monospace;}
 
-        .nav-links a:hover {
-            color: #667eea;
-        }
+  a{color:inherit;}
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #667eea;
-            transition: width 0.3s ease;
-        }
+  ::selection{background:var(--ai); color:#0B1214;}
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--ai);
+    outline-offset:3px;
+    border-radius:4px;
+  }
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
 
-        .hero-content {
-            text-align: center;
-            color: white;
-            z-index: 1;
-            animation: fadeInUp 1s ease;
-        }
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(11,18,20,0.75);
+    backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem;
+    display:flex; align-items:center; gap:8px;
+  }
+  .nav-mark .dot{width:7px; height:7px; border-radius:50%; background:var(--ai); box-shadow:0 0 10px var(--ai);}
+  .nav-links{display:flex; gap:2rem; list-style:none;}
+  .nav-links a{
+    text-decoration:none; color:var(--text-muted); font-size:0.92rem; font-weight:500;
+    transition:color .25s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--ai);
+    border:1px solid rgba(79,216,196,0.35); padding:8px 16px; border-radius:100px;
+    text-decoration:none; transition:all .25s ease; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--ai-dim); border-color:var(--ai);}
+  .nav-toggle{display:none;}
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
+  @media (max-width:760px){
+    .nav-links{display:none;}
+  }
 
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:140px 0 80px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.12em;
+    color:var(--text-muted); text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow .seg-mobile{color:var(--mobile);}
+  .hero-eyebrow .seg-ai{color:var(--ai);}
+  .hero h1{
+    font-size:clamp(2.6rem, 5.6vw, 4.4rem);
+    font-weight:700; line-height:1.03; margin-bottom:22px;
+  }
+  .hero p.lede{
+    font-size:1.15rem; color:var(--text-muted); max-width:52ch; margin-bottom:36px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    padding:14px 26px; border-radius:100px; font-size:0.95rem; font-weight:600;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:all .25s ease; border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--text); color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(236,232,225,0.15);}
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--ai); color:var(--ai);}
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+  .hero-stats{
+    display:flex; gap:32px; margin-top:52px; flex-wrap:wrap;
+  }
+  .hero-stat .num{font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:700;}
+  .hero-stat .lbl{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em;}
 
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+  /* convergence diagram */
+  .converge{width:100%; height:auto; max-width:440px; justify-self:center;}
+  .converge path{fill:none; stroke-linecap:round;}
+  .converge .path-mobile{stroke:var(--mobile);}
+  .converge .path-ai{stroke:var(--ai);}
+  .converge .path-fused{stroke:var(--text);}
+  .converge .node{fill:var(--bg); stroke-width:1.5;}
+  .converge text{font-family:'IBM Plex Mono',monospace; fill:var(--text-dim); font-size:11px;}
 
-        .btn-primary {
-            background: white;
-            color: #667eea;
-        }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .converge{max-width:320px; order:-1; margin-bottom:20px;}
+  }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:110px 0;}
+  .section-head{margin-bottom:56px;}
+  .section-eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--ai);
+    text-transform:uppercase; letter-spacing:0.12em; margin-bottom:14px; display:block;
+  }
+  .section-title{font-size:clamp(1.7rem, 3vw, 2.3rem); font-weight:700;}
+  .section-sub{color:var(--text-muted); max-width:60ch; margin-top:14px;}
+  .divider{height:1px; background:var(--line); border:none;}
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-        }
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:64px; align-items:start;}
+  .about-text p{color:var(--text-muted); font-size:1.03rem; margin-bottom:18px;}
+  .about-text strong{color:var(--text); font-weight:600;}
+  .about-facts{display:flex; flex-direction:column; gap:0;}
+  .fact{padding:18px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px;}
+  .fact:first-child{padding-top:0;}
+  .fact-k{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em;}
+  .fact-v{font-size:0.92rem; text-align:right; color:var(--text-muted); max-width:60%;}
 
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr; gap:36px;} }
 
-        .section-dark {
-            background: white;
-        }
+  /* ---------- SKILLS ---------- */
+  .skills-cols{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .skill-col{padding:28px 24px; border-right:1px solid var(--line);}
+  .skill-col:last-child{border-right:none;}
+  .skill-col h4{
+    font-family:'IBM Plex Mono',monospace; font-size:0.74rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--text-dim); margin-bottom:16px; font-weight:500;
+  }
+  .skill-col ul{list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .skill-col li{font-size:0.92rem; color:var(--text-muted);}
+  .skill-col.ai-col h4{color:var(--ai);}
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+  @media (max-width:820px){
+    .skills-cols{grid-template-columns:1fr 1fr;}
+    .skill-col{border-bottom:1px solid var(--line);}
+    .skill-col:nth-child(odd){border-right:1px solid var(--line);}
+    .skill-col:nth-child(even){border-right:none;}
+  }
+  @media (max-width:520px){
+    .skills-cols{grid-template-columns:1fr;}
+    .skill-col{border-right:none !important;}
+  }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-        }
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{display:flex; flex-direction:column;}
+  .tl-item{
+    display:grid; grid-template-columns:160px 1fr; gap:32px;
+    padding:32px 0; border-top:1px solid var(--line);
+  }
+  .tl-item:last-child{border-bottom:1px solid var(--line);}
+  .tl-date{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--text-dim); padding-top:4px;}
+  .tl-role{font-size:1.15rem; font-weight:600; margin-bottom:2px;}
+  .tl-org{color:var(--mobile); font-size:0.92rem; margin-bottom:14px; font-weight:500;}
+  .tl-item ul{padding-left:18px; color:var(--text-muted); display:flex; flex-direction:column; gap:8px;}
+  .tl-item li{font-size:0.95rem;}
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+  @media (max-width:700px){
+    .tl-item{grid-template-columns:1fr; gap:8px;}
+  }
 
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .pcard{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px; display:flex; flex-direction:column; transition:border-color .3s ease, transform .3s ease;
+  }
+  .pcard:hover{border-color:var(--line-strong); transform:translateY(-4px);}
+  .pcard.featured{grid-column:1 / -1;}
+  .ptag{
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em;
+    padding:4px 10px; border-radius:100px; display:inline-block; width:fit-content; margin-bottom:16px;
+  }
+  .ptag.ai{color:var(--ai); background:var(--ai-dim);}
+  .ptag.mobile{color:var(--mobile); background:var(--mobile-dim);}
+  .pcard h3{font-size:1.25rem; margin-bottom:6px;}
+  .pstack{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--text-dim); margin-bottom:14px;}
+  .pcard p.pdesc{color:var(--text-muted); font-size:0.94rem; margin-bottom:10px;}
+  .pcard ul.pbullets{color:var(--text-muted); font-size:0.9rem; padding-left:18px; display:flex; flex-direction:column; gap:6px; margin-top:6px;}
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
+  .featured-body{display:grid; grid-template-columns:1.1fr 0.9fr; gap:36px;}
+  @media (max-width:800px){ .featured-body{grid-template-columns:1fr;} }
 
-        .skill-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+  .mtable{width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin-top:8px;}
+  .mtable th, .mtable td{padding:9px 10px; text-align:left; border-bottom:1px solid var(--line);}
+  .mtable th{color:var(--text-dim); font-weight:500; text-transform:uppercase; font-size:0.7rem; letter-spacing:0.04em;}
+  .mtable td.best{color:var(--ai); font-weight:600;}
+  .mtable tr:last-child td{border-bottom:none;}
 
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
-        }
+  @media (max-width:820px){ .projects-grid{grid-template-columns:1fr;} }
 
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
+  .more-projects{margin-top:24px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .mp-row{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:18px 24px; border-top:1px solid var(--line);
+  }
+  .mp-row:first-child{border-top:none;}
+  .mp-name{font-weight:600; font-size:0.95rem;}
+  .mp-stack{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--text-dim); text-align:right;}
 
-        .experience-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
+  /* ---------- EDUCATION ---------- */
+  .edu-list{display:flex; flex-direction:column;}
+  .edu-item{display:grid; grid-template-columns:160px 1fr; gap:32px; padding:26px 0; border-top:1px solid var(--line);}
+  .edu-item:last-child{border-bottom:1px solid var(--line);}
+  .edu-date{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--text-dim);}
+  .edu-item h3{font-size:1.05rem; margin-bottom:4px;}
+  .edu-item .edu-org{color:var(--text-muted); font-size:0.92rem; margin-bottom:6px;}
+  .edu-item .edu-note{color:var(--text-dim); font-size:0.85rem;}
+  @media (max-width:700px){ .edu-item{grid-template-columns:1fr; gap:6px;} }
 
-        .experience-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-left: 4px solid #667eea;
-        }
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--bg-elevated); border:1px solid var(--line); border-radius:24px;
+    padding:64px 48px; text-align:center;
+  }
+  .contact h2{font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:16px;}
+  .contact p{color:var(--text-muted); max-width:48ch; margin:0 auto 36px; font-size:1.02rem;}
+  .contact-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap;}
+  .clink{
+    display:flex; align-items:center; gap:8px; padding:12px 22px; border-radius:100px;
+    border:1px solid var(--line-strong); text-decoration:none; font-size:0.9rem; font-weight:500;
+    transition:all .25s ease;
+  }
+  .clink:hover{border-color:var(--ai); color:var(--ai); transform:translateY(-2px);}
 
-        .experience-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
+  @media (max-width:700px){ .contact{padding:48px 24px;} }
 
-        .experience-title {
-            font-size: 1.5rem;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-company {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-date {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .project-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
-            color: white;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-tech {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .project-body {
-            padding: 1.5rem;
-        }
-
-        .project-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: white;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #667eea;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .contact-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .section {
-                padding: 3rem 1rem;
-            }
-        }
-    </style>
+  footer{padding:40px 0; text-align:center;}
+  footer p{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--text-dim);}
+</style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-content">
-            <div class="logo">MS</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark"><span class="dot"></span>Sharafat</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow"><span class="seg-mobile">MOBILE</span>&nbsp;→&nbsp;<span class="seg-ai">AI ENGINEER</span></div>
+      <h1>Muhammad Sharafat</h1>
+      <p class="lede">Flutter &amp; Android developer with two internships shipping production apps — now building retrieval-augmented AI systems, most recently an AI medical assistant trained on WHO health data.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">2</div><div class="lbl">Flutter internships</div></div>
+        <div class="hero-stat"><div class="num">7+</div><div class="lbl">Shipped projects</div></div>
+        <div class="hero-stat"><div class="num">2026</div><div class="lbl">BS IT graduation</div></div>
+      </div>
+    </div>
+
+    <svg class="converge" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path class="path-mobile" d="M20,60 C140,60 160,150 200,160" stroke-width="2" stroke-dasharray="4 6"/>
+      <path class="path-ai" d="M20,260 C140,260 160,170 200,160" stroke-width="2" stroke-dasharray="4 6"/>
+      <path class="path-fused" d="M200,160 C260,160 300,160 380,160" stroke-width="2.5"/>
+      <circle class="node" cx="20" cy="60" r="5" stroke="#FF8B5E"/>
+      <circle class="node" cx="20" cy="260" r="5" stroke="#4FD8C4"/>
+      <circle class="node" cx="200" cy="160" r="6" stroke="#ECE8E1"/>
+      <circle cx="380" cy="160" r="4" fill="#ECE8E1"/>
+      <text x="24" y="46">FLUTTER / ANDROID</text>
+      <text x="24" y="284">RAG / LLMs / ML</text>
+      <text x="240" y="150">SHIPPING AI PRODUCTS</text>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <span class="section-eyebrow">About</span>
+          <h2 class="section-title" style="margin-bottom:24px;">Builder first, learning AI by shipping it.</h2>
+          <div class="about-text">
+            <p>I'm a final-year <strong>BS Information Technology</strong> student at the <strong>University of the Punjab</strong>, Lahore, graduating in June 2026. My background is in Flutter and Android development — two remote internships where I shipped real apps from design through deployment.</p>
+            <p>Over the past year I've been moving deliberately toward <strong>AI engineering</strong>. My final year project, <strong>SEHAT</strong>, is a Retrieval-Augmented Generation medical assistant that combines vector search and BM25 over WHO documents to answer health questions in English and Roman Urdu — my first real system built end-to-end around LLMs.</p>
+            <p>I like problems where a working product is the proof: something that runs, gets used, and can be measured — whether that's a mobile app in someone's hand or a model's F1 score on a held-out set.</p>
+          </div>
+        </div>
+        <div class="reveal about-facts">
+          <div class="fact"><span class="fact-k">Based in</span><span class="fact-v">Lahore, Pakistan</span></div>
+          <div class="fact"><span class="fact-k">Studying</span><span class="fact-v">BS Information Technology, Univ. of the Punjab</span></div>
+          <div class="fact"><span class="fact-k">Graduating</span><span class="fact-v">June 2026</span></div>
+          <div class="fact"><span class="fact-k">Core stack</span><span class="fact-v">Flutter, Dart, Java, Firebase</span></div>
+          <div class="fact"><span class="fact-k">Growing in</span><span class="fact-v">Python, RAG, LangChain, ML</span></div>
+          <div class="fact"><span class="fact-k">Open to</span><span class="fact-v">AI Engineer / Flutter roles</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Skills</span>
+        <h2 class="section-title">Two stacks, one toolbox.</h2>
+      </div>
+      <div class="skills-cols reveal">
+        <div class="skill-col ai-col">
+          <h4>AI / ML</h4>
+          <ul>
+            <li>Retrieval-Augmented Generation</li>
+            <li>LangChain</li>
+            <li>Hybrid Retrieval (Vector + BM25)</li>
+            <li>Groq LLM / Prompt Engineering</li>
+            <li>scikit-learn, XGBoost</li>
+            <li>Neo4j (vector search)</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>Mobile &amp; Frontend</h4>
+          <ul>
+            <li>Flutter / Dart</li>
+            <li>Android SDK (Java)</li>
+            <li>Firebase &amp; Firestore</li>
+            <li>Provider (state management)</li>
+            <li>SQLite</li>
+            <li>REST API Integration</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>Languages</h4>
+          <ul>
+            <li>Python</li>
+            <li>Dart</li>
+            <li>Java</li>
+            <li>C++ / C#</li>
+            <li>JavaScript</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>Tools &amp; Platforms</h4>
+          <ul>
+            <li>Git / GitHub</li>
+            <li>Android Studio</li>
+            <li>VS Code</li>
+            <li>MySQL</li>
+            <li>Visual Studio 2022</li>
+            <li>Agile / Sprint workflows</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Experience</span>
+        <h2 class="section-title">Where I've shipped.</h2>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-date">2025 · Remote</div>
+          <div>
+            <div class="tl-role">Flutter Developer Intern</div>
+            <div class="tl-org">Apprythm</div>
+            <ul>
+              <li>Built and shipped two Flutter apps — BMI Calculator and Memento — covering the full lifecycle from UI design to deployment.</li>
+              <li>Engineered reusable widget components with shared state management, cutting UI build time across projects.</li>
             </ul>
+          </div>
         </div>
-    </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Muhammad Sharafat</h1>
-            <p class="subtitle">Full Stack Developer | Mobile App Developer | Flutter Enthusiast</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
+        <div class="tl-item">
+          <div class="tl-date">2025 · Remote</div>
+          <div>
+            <div class="tl-role">Flutter Developer Intern</div>
+            <div class="tl-org">DevelopersHub</div>
+            <ul>
+              <li>Delivered multiple mobile app features on schedule within sprint deadlines, meeting acceptance criteria.</li>
+              <li>Improved app startup time through lazy loading and optimized widget-tree restructuring.</li>
+            </ul>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section id="about" class="section section-dark">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>I'm a passionate Information Technology student at the University of the Punjab with solid programming expertise in C++, Java, Flutter, and Web Development. I specialize in both web and Android app development, with hands-on experience building real-world projects.</p>
-                <br>
-                <p>I'm a fast learner who adapts quickly to emerging technologies and frameworks. Recently completed a Flutter internship with Apprithm, gaining hands-on experience on different projects. Currently working on Flutter mobile development and exploring AI RAG (Retrieval-Augmented Generation) technologies. I'm committed to contributing to impactful projects that solve real-world challenges and create meaningful user experiences.</p>
+  <hr class="divider">
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Projects</span>
+        <h2 class="section-title">Selected work.</h2>
+        <p class="section-sub">Two AI systems built end-to-end, plus the mobile apps that came before them.</p>
+      </div>
+
+      <div class="projects-grid reveal">
+
+        <div class="pcard featured">
+          <span class="ptag ai">AI · Final Year Project</span>
+          <h3>SEHAT — AI-Powered Medical Assistant</h3>
+          <div class="pstack">Python · RAG · Neo4j · Groq LLM · BM25</div>
+          <div class="featured-body">
+            <div>
+              <p class="pdesc">A medical assistant that answers health questions in English and Roman Urdu, grounded entirely in indexed WHO documents rather than model memory.</p>
+              <ul class="pbullets">
+                <li>Built a RAG pipeline over indexed WHO medical documents to ground every answer in a verifiable source.</li>
+                <li>Implemented hybrid retrieval — Neo4j vector search fused with BM25 keyword search — for more relevant document recall than either method alone.</li>
+                <li>Served citation-backed answers via Groq LLM, chosen for fast inference on retrieval-heavy queries.</li>
+              </ul>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">☕</div>
-                    <div>Java</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚡</div>
-                    <div>Flutter</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🌐</div>
-                    <div>Web Dev</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📱</div>
-                    <div>Android</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">💾</div>
-                    <div>Database</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔧</div>
-                    <div>C++</div>
-                </div>
+            <div>
+              <p class="pdesc" style="margin-bottom:8px;">How retrieval works:</p>
+              <table class="mtable">
+                <tr><th>Stage</th><th>Method</th><th>Purpose</th></tr>
+                <tr><td>Semantic</td><td>Neo4j vector search</td><td>Meaning-based recall</td></tr>
+                <tr><td>Lexical</td><td>BM25</td><td>Exact-term precision</td></tr>
+                <tr><td>Fusion</td><td>Hybrid ranking</td><td>Best of both, per query</td></tr>
+                <tr><td>Answer</td><td>Groq LLM</td><td>Fast, citation-backed response</td></tr>
+              </table>
             </div>
+          </div>
         </div>
-    </section>
 
-    <section id="experience" class="section">
-        <h2 class="section-title" style="color: white;">Experience & Education</h2>
-        <div class="experience-timeline">
-            <div class="experience-item">
-                <div class="experience-title">Flutter Development Intern</div>
-                <div class="experience-company">Apprithm</div>
-                <div class="experience-date">2024 - 2025</div>
-                <p>Completed comprehensive Flutter internship with hands-on experience on different projects including BMI Calculator and Memento (note-taking app). Gained practical knowledge in mobile app development using Flutter framework, working on real-world applications and improving cross-platform development skills. Currently continuing to work with Flutter and exploring AI RAG (Retrieval-Augmented Generation) technologies.</p>
+        <div class="pcard featured">
+          <span class="ptag ai">AI / ML</span>
+          <h3>Health &amp; Lifestyle Disease Risk Classifier</h3>
+          <div class="pstack">Python · pandas · scikit-learn · XGBoost · SMOTE</div>
+          <div class="featured-body">
+            <div>
+              <p class="pdesc">A supervised classifier predicting whether an individual is "healthy" or "diseased" from lifestyle, demographic, and physiological survey data — ~100,000 rows across 48 features spanning vitals, habits, income, and family history.</p>
+              <ul class="pbullets">
+                <li>Cleaned data with column-appropriate strategies: mean/median imputation for numeric fields, probability-weighted sampling for categoricals to preserve true class distribution.</li>
+                <li>Encoded ~15 categorical features and addressed target class imbalance with SMOTE before scaling and training.</li>
+                <li>Compared three models before and after balancing, evaluating with confusion matrices and per-class F1 — not accuracy alone.</li>
+              </ul>
             </div>
-            <div class="experience-item">
-                <div class="experience-title">Bachelor of Science (Information Technology)</div>
-                <div class="experience-company">University of the Punjab</div>
-                <div class="experience-date">Nov 2022 - June 2026</div>
-                <p><strong>Relevant Courses:</strong> Programming Fundamentals, OOP, DSA, Software Engineering, Operating System, Database System, Artificial Intelligence, System Network Administration</p>
+            <div>
+              <p class="pdesc" style="margin-bottom:8px;">Model comparison (accuracy):</p>
+              <table class="mtable">
+                <tr><th>Model</th><th>Baseline</th><th>SMOTE + tuned</th></tr>
+                <tr><td>Logistic Regression</td><td>83.4%</td><td class="best">88.2%</td></tr>
+                <tr><td>XGBoost</td><td>87.0%</td><td>87.7%</td></tr>
+                <tr><td>Random Forest</td><td>79.4%</td><td>82.9%</td></tr>
+              </table>
+              <p class="pdesc" style="margin-top:10px; font-size:0.85rem;">Best config — Logistic Regression on SMOTE-balanced, scaled data — reached 88.2% accuracy (F1: 0.92 healthy / 0.80 diseased).</p>
             </div>
+          </div>
         </div>
-    </section>
 
-    <section id="projects" class="section section-dark">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Role-Based Hostel Management System</div>
-                    <div class="project-tech">Java • Android Studio • SQLite</div>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">Developed a comprehensive hostel management Android application with role-based access control. Implemented three distinct user roles (Warden, Housemaster, Houseboy) each with specific permissions and functionalities. Features include room management, student records, maintenance tracking, and reporting system.</p>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">BMI Calculator</div>
-                    <div class="project-tech">Flutter • Dart</div>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">Built a beautiful and intuitive BMI Calculator app using Flutter with modern UI design. Features include real-time BMI calculation, health category classification, personalized health recommendations, and responsive animations for enhanced user experience.</p>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Memento</div>
-                    <div class="project-tech">Flutter • Dart • Firebase</div>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">Developed a feature-rich note-taking and reminder application using Flutter. Implemented local storage for notes, push notifications for reminders, rich text editing, categories and tags, and a clean Material Design interface for seamless user experience.</p>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">iOS Calculator App</div>
-                    <div class="project-tech">Java • Android Studio</div>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">Developed a fully functional iPhone-style calculator app using Java in Android Studio. Added input validation and error handling for improved stability. Designed a clean, responsive UI for consistent performance across Android devices.</p>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">To-Do List Web App</div>
-                    <div class="project-tech">Java Servlets • HTML • CSS • JavaScript</div>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">Developed a dynamic To-Do List web application using Java Servlets for backend processing. Implemented features including adding, editing, and deleting tasks with real-time updates. Managed data persistence and client-server communication via Servlets.</p>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">To-Do List Android App</div>
-                    <div class="project-tech">Java • Android Studio • SQLite</div>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">Created a mobile To-Do List application for Android with local database integration. Features task creation, editing, deletion, priority levels, due dates, and persistent data storage using SQLite database for offline functionality.</p>
-                </div>
-            </div>
+        <div class="pcard">
+          <span class="ptag mobile">Mobile</span>
+          <h3>Hostel Management System</h3>
+          <div class="pstack">Java · Android Studio · SQLite · Firebase</div>
+          <p class="pdesc">Role-based Android app for Warden, Housemaster, and Houseboy users.</p>
+          <ul class="pbullets">
+            <li>Room allocation, attendance tracking, and maintenance requests across three permission levels.</li>
+            <li>Real-time occupancy management via Firebase Firestore alongside a local SQLite data layer.</li>
+          </ul>
         </div>
-    </section>
 
-    <section id="contact" class="section">
-        <h2 class="section-title" style="color: white;">Get In Touch</h2>
-        <div class="contact-content">
-            <p style="color: white; font-size: 1.2rem; margin-bottom: 2rem;">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
-            <div class="contact-links">
-                <a href="mailto:sharafat.pucit@gmail.com" class="contact-link">
-                    <span>📧</span>
-                    <span>Email</span>
-                </a>
-                <a href="https://www.linkedin.com/in/muhammad-sharafat" class="contact-link" target="_blank">
-                    <span>💼</span>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/muhammad-sharafat-727" class="contact-link" target="_blank">
-                    <span>💻</span>
-                    <span>GitHub</span>
-                </a>
-                <a href="tel:+923260468249" class="contact-link">
-                    <span>📱</span>
-                    <span>Call</span>
-                </a>
-            </div>
+        <div class="pcard">
+          <span class="ptag mobile">Mobile</span>
+          <h3>Memento — Note-Taking App</h3>
+          <div class="pstack">Flutter · Dart · SQLite</div>
+          <p class="pdesc">Cross-platform note app that works fully offline.</p>
+          <ul class="pbullets">
+            <li>Rich text editing, category tagging, and local storage with no network dependency.</li>
+            <li>Push notifications and app-wide state managed with Provider.</li>
+          </ul>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2025 Muhammad Sharafat. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">Built with passion and dedication</p>
-    </footer>
+        <div class="pcard">
+          <span class="ptag mobile">Mobile</span>
+          <h3>BMI Calculator</h3>
+          <div class="pstack">Flutter · Dart</div>
+          <p class="pdesc">A polished health utility app with real-time feedback.</p>
+          <ul class="pbullets">
+            <li>Real-time BMI calculation with health category classification.</li>
+            <li>Optimized widget rendering for smooth in-app animations.</li>
+          </ul>
+        </div>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+      </div>
 
-        // Navbar background change on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
-            } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            }
-        });
+      <div class="more-projects reveal">
+        <div class="mp-row">
+          <span class="mp-name">iOS-Style Calculator</span>
+          <span class="mp-stack">Java · Android Studio</span>
+        </div>
+        <div class="mp-row">
+          <span class="mp-name">To-Do List Web App</span>
+          <span class="mp-stack">Java Servlets · HTML/CSS/JS</span>
+        </div>
+        <div class="mp-row">
+          <span class="mp-name">To-Do List Android App</span>
+          <span class="mp-stack">Java · Android Studio · SQLite</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+  <hr class="divider">
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                }
-            });
-        }, observerOptions);
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Education</span>
+        <h2 class="section-title">Academic background.</h2>
+      </div>
+      <div class="edu-list reveal">
+        <div class="edu-item">
+          <div class="edu-date">Nov 2022 – June 2026</div>
+          <div>
+            <h3>Bachelor of Science in Information Technology</h3>
+            <div class="edu-org">University of the Punjab, Lahore, Pakistan</div>
+            <div class="edu-note">Relevant coursework: Programming Fundamentals, OOP, Data Structures &amp; Algorithms, Software Engineering, Operating Systems, Database Systems, Artificial Intelligence, System &amp; Network Administration.</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-date">Pre-2022</div>
+          <div>
+            <h3>Intermediate in Computer Science (ICS)</h3>
+            <div class="edu-org">Educators Ahmad Pur Sial, Jhang, Pakistan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        document.querySelectorAll('.project-card, .experience-item, .skill-card').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact reveal">
+        <h2>Let's build something.</h2>
+        <p>Open to AI Engineer and Flutter developer roles — and always happy to talk through a RAG pipeline or a Flutter widget tree.</p>
+        <div class="contact-links">
+          <a class="clink" href="mailto:muhammadsharafat7066@gmail.com">Email</a>
+          <a class="clink" href="https://www.linkedin.com/in/muhammad-sharafat" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="clink" href="https://github.com/muhammad-sharafat-727" target="_blank" rel="noopener">GitHub</a>
+          <a class="clink" href="tel:+923260468249">+92 326 0468249</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="wrap">© 2026 Muhammad Sharafat — Lahore, Pakistan</p>
+</footer>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // draw-in animation for convergence lines
+  document.querySelectorAll('.converge path').forEach(path => {
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = path.classList.contains('path-fused') ? len : path.getAttribute('stroke-dasharray');
+    if(path.classList.contains('path-fused')){
+      path.style.strokeDashoffset = len;
+      path.style.transition = 'stroke-dashoffset 1.4s ease 0.6s';
+      requestAnimationFrame(() => requestAnimationFrame(() => { path.style.strokeDashoffset = 0; }));
+    }
+  });
+</script>
+
 </body>
 </html>
